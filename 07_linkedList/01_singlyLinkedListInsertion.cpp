@@ -1,58 +1,44 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class Node
-{
-public:
-  int data;
-  Node *next;
+class Node {
+  public:
+    int data;
+    Node *next;
+
+    Node(int data) {
+      this->data = data;
+      this->next = NULL;
+    }
 };
 
-
-void printList(Node *head) {
-  while (head) {
-    cout << head->data<<" ";
+void displayList(Node *head) {
+  while(head) {
+    cout << head->data << " ";
     head = head->next;
-    
   }
   cout << endl;
   return;
 }
 
 
+int main() {
+  // insertion in start
+  int arr[] = {3, 1, 5, 2, 9, 8, 0};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  Node *head = NULL;
 
-
-int main() 
-{ 
-
-  // array
-  int n;
-  cout << "Enter the size of array: ";
-  cin >> n;
-  int *arr = new int[n];
-  cout << "Enter the values of array:\n";
-  for (int i = 0; i < n; i++)
-  {
-    cin >> arr[i];
+  for (int i = n - 1; i >= 0; i--) {
+    if (head == NULL) {
+      Node *newNode = new Node(arr[i]);
+      head = newNode;
+    }
+    else {
+      Node *newNode = new Node(arr[i]);
+      newNode->next = head;
+      head = newNode;
+    }
   }
-
-
-  // linked list
-  Node *head = new Node;
-  head->data = arr[0];
-  head->next = NULL;
-
-  Node *temp = head;
-
-  for (int i = 1; i < n; i++) {
-    temp->next = new Node;
-    temp = temp->next;
-    temp->data = arr[i];
-  }
-
-  printList(head);
-
-  
-
+  displayList(head);
   return 0;
 }
