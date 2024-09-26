@@ -23,22 +23,45 @@ void displayList(Node *head) {
 
 
 int main() {
-  // insertion in start
+  // ********************* insertion in end ****************************************
   int arr[] = {3, 1, 5, 2, 9, 8, 0};
   int n = sizeof(arr) / sizeof(arr[0]);
   Node *head = NULL;
+  Node *tail = NULL;
 
-  for (int i = n - 1; i >= 0; i--) {
+  for (int i = 0; i < n; i++) {
     if (head == NULL) {
       Node *newNode = new Node(arr[i]);
       head = newNode;
+      tail = newNode;
     }
     else {
       Node *newNode = new Node(arr[i]);
-      newNode->next = head;
-      head = newNode;
+      tail->next = newNode;
+      tail = newNode;
     }
   }
   displayList(head);
+
+
+
+
+  // ********************* insertion in start ****************************************
+  // int arr[] = {3, 1, 5, 2, 9, 8, 0};
+  // int n = sizeof(arr) / sizeof(arr[0]);
+  // Node *head = NULL;
+
+  // for (int i = n - 1; i >= 0; i--) {
+  //   if (head == NULL) {
+  //     Node *newNode = new Node(arr[i]);
+  //     head = newNode;
+  //   }
+  //   else {
+  //     Node *newNode = new Node(arr[i]);
+  //     newNode->next = head;
+  //     head = newNode;
+  //   }
+  // }
+  // displayList(head);
   return 0;
 }
