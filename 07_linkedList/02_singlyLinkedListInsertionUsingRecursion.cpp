@@ -23,54 +23,36 @@ void displayList(Node *head) {
 }
 
 
-void insertAtEnd(Node *head, Node *newNode) {
-  if (head->next == NULL) {
-    head->next = newNode;
-    return;
-  }
+// insertion at first using recursion
+Node *createLinkedListFirst(int arr[], int n) {
+  if (n == 0) {
+    Node *newNode = new Node(arr[n]);
+    return newNode;
+  } 
 
-  insertAtEnd(head->next, newNode);
-  return;
+  Node *newNode = new Node(arr[n]);
+  newNode->next = createLinkedListFirst(arr, n - 1);
+  return newNode;
+}
+
+// insertion at last using recursion
+Node *createLinkedListLast(int arr[], int index, int n) {
+  if (index == n) {
+    Node *newNode = new Node(arr[index]);
+    return newNode;
+  } 
+
+  Node *newNode = new Node(arr[index]);
+  newNode->next = createLinkedListLast(arr, index + 1, n);
+  return newNode;
 }
 
 
 int main() {
-  // ********************* insertion in end ****************************************
   int arr[] = {3, 1, 5, 2, 9, 8, 0};
   int n = sizeof(arr) / sizeof(arr[0]);
   Node *head = NULL;
-
-  for (int i = 0; i < n; i++) {
-    if (head == NULL) {
-      Node *newNode = new Node(arr[i]);
-      head = newNode;
-    }
-    else {
-      Node *newNode = new Node(arr[i]);
-      insertAtEnd(head, newNode);
-    }
-  }
+  head = createLinkedListLast(arr, 0, n - 1);
   displayList(head);
-
-
-
-
-  // ********************* insertion in start ****************************************
-  // int arr[] = {3, 1, 5, 2, 9, 8, 0};
-  // int n = sizeof(arr) / sizeof(arr[0]);
-  // Node *head = NULL;
-
-  // for (int i = n - 1; i >= 0; i--) {
-  //   if (head == NULL) {
-  //     Node *newNode = new Node(arr[i]);
-  //     head = newNode;
-  //   }
-  //   else {
-  //     Node *newNode = new Node(arr[i]);
-  //     newNode->next = head;
-  //     head = newNode;
-  //   }
-  // }
-  // displayList(head);
   return 0;
 }
